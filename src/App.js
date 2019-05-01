@@ -1,9 +1,8 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
-import MainPage from './Pages/MainPage'
-import SearchPage from './Pages/SearchPage'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import MainPage from './pages/MainPage'
+import SearchPage from './pages/SearchPage'
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 class BooksApp extends React.Component {
 
