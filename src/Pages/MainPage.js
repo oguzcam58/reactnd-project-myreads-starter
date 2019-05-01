@@ -1,24 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import * as BooksAPI from '../BooksAPI'
 import BooksOnTheShelf from '../components/BooksOnTheShelf'
 
 class MainPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { allBooks: []};
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll()
-    .then(response => {
-      console.log(`Response is ${JSON.stringify(response)}`)
-      this.setState({ allBooks: response })
-    })
-  }
-
   render() {
-    const { allBooks } = this.state
+    const { allBooks, handleShelfUpdate } = this.props
     const shelves = new Map()
     allBooks.map(book => {
       let booksOnTheShelf = shelves.get(book.shelf)
@@ -28,6 +14,7 @@ class MainPage extends React.Component {
         booksOnTheShelf.push(book)
         shelves.set(book.shelf, booksOnTheShelf)
       }
+      return book
     })
 
     return (
@@ -36,7 +23,8 @@ class MainPage extends React.Component {
           <h1>MyReads</h1>
         </div>
         <BooksOnTheShelf
-          shelves={ shelves }
+          shelves={shelves}
+          handleShelfUpdate={handleShelfUpdate}
           />
         <div className="open-search">
           <Link to="/search">Add a book</Link>
