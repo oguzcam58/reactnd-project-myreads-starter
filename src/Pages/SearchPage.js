@@ -28,7 +28,9 @@ class SearchPage extends React.Component {
 
   render() {
     const { query, results } = this.state
-    let filteredResults = results && results.length > 0 ? results.filter(book => book.authors) : []
+    let filteredResults = results && results.length > 0 ?
+      results.filter(book => book.imageLinks && book.imageLinks.thumbnail) :
+      []
 
     return (
       <div className="search-books">
