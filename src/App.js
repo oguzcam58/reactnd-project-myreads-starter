@@ -20,17 +20,22 @@ class BooksApp extends React.Component {
     })
   }
 
-  handleShelfUpdate(id, event) {
+  handleShelfUpdate(selectedBook, event) {
     const { allBooks } = this.state
-    const book = allBooks.filter(book => book.id === id).map(book => book)
     const selectedShelf = event.target.value
-    BooksAPI.update(book, selectedShelf)
+    BooksAPI.update(selectedBook, selectedShelf)
+    let existingBook = false
     let updatedBooks = allBooks.map(book => {
-      if (book.id === id) {
+      if (book.id === selectedBook.id) {
         book.shelf = selectedShelf
+        existingBook = true
       }
       return book
     })
+    if (!existingBook) {
+      selectedBook.shelf = selectedShelf
+      updatedBooks.push(selectedBook)
+    }
     this.setState({ allBooks: updatedBooks })
   }
 
@@ -39,13 +44,19 @@ class BooksApp extends React.Component {
     return (
       <Router>
         <div className="app">
-          <Route exact path="/" render={() =>
-            <MainPage
-              allBooks={allBooks}
-              handleShelfUpdate={this.handleShelfUpdate}
+          <Route exact path="/"
+            render={() =>
+              <MainPage
+                allBooks={allBooks}
+                handleShelfUpdate={this.handleShelfUpdate}
+                />
+            } />
+          <Route path="/search"
+            render={() =>
+              <SearchPage
+                handleShelfUpdate={this.handleShelfUpdate}
               />
-            }/>
-          <Route path="/search" component={SearchPage} />
+            } />
         </div>
       </Router>
     )

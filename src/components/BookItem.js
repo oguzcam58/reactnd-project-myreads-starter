@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 class BookItem extends Component {
 
   render() {
-    const { id, title, authors, shelf, url, handleShelfUpdate } = this.props;
-    let selectedShelf = shelf ? shelf : 'none'
+    const { book, handleShelfUpdate } = this.props;
+    let selectedShelf = book.shelf ? book.shelf : 'none'
 
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${url}")` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
           <div className="book-shelf-changer">
-            <select value={selectedShelf} onChange={(event) => handleShelfUpdate(id, event)}>
+            <select value={selectedShelf} onChange={(event) => handleShelfUpdate(book, event)}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -20,8 +20,8 @@ class BookItem extends Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{title}</div>
-        <div className="book-authors">{authors}</div>
+        <div className="book-title">{book.title}</div>
+        <div className="book-authors">{!book.authors ? '' : book.authors.join(', ')}</div>
       </div>)
   }
 

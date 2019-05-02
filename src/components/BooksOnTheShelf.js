@@ -18,11 +18,7 @@ class BooksOnTheShelf extends Component {
                 { currentlyReading && currentlyReading.map(book => (
                   <li key={book.id}>
                     <BookItem
-                      id={book.id}
-                      title={book.title}
-                      authors={book.authors.join(", ")}
-                      url={book.imageLinks.thumbnail}
-                      shelf={book.shelf}
+                      book={book}
                       handleShelfUpdate={handleShelfUpdate}
                       />
                   </li>
@@ -37,11 +33,7 @@ class BooksOnTheShelf extends Component {
                 { wantToRead && wantToRead.map(book => (
                   <li key={book.id}>
                     <BookItem
-                      id={book.id}
-                      title={book.title}
-                      authors={book.authors.join(", ")}
-                      url={book.imageLinks.thumbnail}
-                      shelf={book.shelf}
+                      book={book}
                       handleShelfUpdate={handleShelfUpdate}
                       />
                   </li>
@@ -56,11 +48,7 @@ class BooksOnTheShelf extends Component {
                 { read && read.map(book => (
                   <li key={book.id}>
                     <BookItem
-                      id={book.id}
-                      title={book.title}
-                      authors={book.authors.join(", ")}
-                      url={book.imageLinks.thumbnail}
-                      shelf={book.shelf}
+                      book={book}
                       handleShelfUpdate={handleShelfUpdate}
                       />
                   </li>
