@@ -4,66 +4,38 @@ import BookItem from './BookItem'
 
 class BooksOnTheShelf extends Component {
   render() {
-    const { shelves, handleShelfUpdate } = this.props
-    let currentlyReading = shelves.get('currentlyReading')
-    let wantToRead = shelves.get('wantToRead')
-    let read = shelves.get('read')
+    const { booksOnShelves, handleShelfUpdate } = this.props
+    const bookShelves = [{title: "Currently Reading", books: booksOnShelves.get("currentlyReading")},
+      {title: "Want to Read", books: booksOnShelves.get("wantToRead")},
+      {title: "Read", books: booksOnShelves.get("read")}]
 
     return (
       <div className="list-books-content">
         <div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                { currentlyReading && currentlyReading.map(book => (
-                  <li key={book.id}>
-                    <BookItem
-                      book={book}
-                      handleShelfUpdate={handleShelfUpdate}
-                      />
-                  </li>
-                ))}
-              </ol>
+          { bookShelves.map(shelf =>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">{shelf.title}</h2>
+              <div className="bookshelf-books">
+                <ol className="books-grid">
+                  { shelf.books && shelf.books.map(book => (
+                    <li key={book.id}>
+                      <BookItem
+                        book={book}
+                        handleShelfUpdate={handleShelfUpdate}
+                        />
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Want to Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                { wantToRead && wantToRead.map(book => (
-                  <li key={book.id}>
-                    <BookItem
-                      book={book}
-                      handleShelfUpdate={handleShelfUpdate}
-                      />
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                { read && read.map(book => (
-                  <li key={book.id}>
-                    <BookItem
-                      book={book}
-                      handleShelfUpdate={handleShelfUpdate}
-                      />
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+          )}
         </div>
       </div>)
   }
 }
 
 BooksOnTheShelf.propTypes = {
-  shelves: PropTypes.instanceOf(Map).isRequired,
+  booksOnShelves: PropTypes.instanceOf(Map).isRequired,
   handleShelfUpdate: PropTypes.func.isRequired,
 }
 

@@ -6,14 +6,14 @@ import BooksOnTheShelf from '../components/BooksOnTheShelf'
 class MainPage extends React.Component {
   render() {
     const { allBooks, handleShelfUpdate } = this.props
-    const shelves = new Map()
+    const booksOnShelves = new Map()
     allBooks.map(book => {
-      let booksOnTheShelf = shelves.get(book.shelf)
+      let booksOnTheShelf = booksOnShelves.get(book.shelf)
       if (!booksOnTheShelf) {
-        shelves.set(book.shelf, [book])
+        booksOnShelves.set(book.shelf, [book])
       } else {
         booksOnTheShelf.push(book)
-        shelves.set(book.shelf, booksOnTheShelf)
+        booksOnShelves.set(book.shelf, booksOnTheShelf)
       }
       return book
     })
@@ -24,7 +24,7 @@ class MainPage extends React.Component {
           <h1>MyReads</h1>
         </div>
         <BooksOnTheShelf
-          shelves={shelves}
+          booksOnShelves={booksOnShelves}
           handleShelfUpdate={handleShelfUpdate}
           />
         <div className="open-search">
