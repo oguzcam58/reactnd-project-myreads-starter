@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import BookItem from './BookItem'
 
 class BooksOnTheShelf extends Component {
@@ -59,6 +60,11 @@ class BooksOnTheShelf extends Component {
         </div>
       </div>)
   }
+}
+
+BooksOnTheShelf.propTypes = {
+  shelves: PropTypes.instanceOf(Map).isRequired,
+  handleShelfUpdate: PropTypes.func.isRequired,
 }
 
 export default BooksOnTheShelf
