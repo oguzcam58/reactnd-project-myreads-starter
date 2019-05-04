@@ -56,6 +56,7 @@ class BooksApp extends React.Component {
           <Route path="/search"
             render={() =>
               <SearchPage
+                allBooks={allBooks}
                 handleShelfUpdate={this.handleShelfUpdate}
               />
             } />
