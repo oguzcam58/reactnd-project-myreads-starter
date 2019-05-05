@@ -8,7 +8,7 @@ _This project is implemented in scope of Udacity's React Nanodegree course._
 * install project dependencies with `npm install`
 * start the development server with `npm start`
 
-## Licence
+## License
 
-This repository is under MIT Licence.
-For details, check out [LICENCE.md](LICENCE.md).
+This repository is under MIT License.
+For details, check out [LICENSE.md](LICENSE.md).
