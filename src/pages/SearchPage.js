@@ -44,9 +44,7 @@ class SearchPage extends React.Component {
   render() {
     const { query, results, errorOccurred, apiCallInProgress } = this.state;
     const { allBooks } = this.props;
-    let filteredResults = results && results.length > 0 ?
-      results.filter(book => book.imageLinks && book.imageLinks.thumbnail) :
-      [];
+    let filteredResults = results && results.length > 0 ? results : [];
 
     filteredResults.forEach(currentBook => {
       let bookOnTheShelf = allBooks.filter(book => book.id === currentBook.id);
